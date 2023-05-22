@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.examen</groupId>
-	<artifactId>controlcalif</artifactId>
-	<version>1.0</version>
-	<packaging>war</packaging>
-	<name>Control de Calificaciones</name>
-	<description>Sistema de Control de Calificaciones</description>
+	<artifactId>api-control-calificaciones</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>API Control de Calificaciones</name>
+	<description>API del Sistema de Control de Calificaciones</description>
 	<properties>
 		<java.version>11</java.version>
 		<hibernate.version>5.4.2.Final</hibernate.version>
