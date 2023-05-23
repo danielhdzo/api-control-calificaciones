@@ -1,10 +1,13 @@
 package com.examen.controlcalif.service.impl;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,10 @@ import com.examen.controlcalif.repository.AlumnoRepository;
 import com.examen.controlcalif.repository.CalificacionRepository;
 import com.examen.controlcalif.service.CalificacionesService;
 import com.examen.controlcalif.util.Constantes;
+import com.examen.controlcalif.util.GeneradorReportes;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 @Transactional
@@ -37,6 +44,9 @@ public class CalificacionesImpl implements CalificacionesService {
 
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private GeneradorReportes generadorReportes;
 
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constantes.PATRON_FECHA);
 
@@ -106,7 +116,7 @@ public class CalificacionesImpl implements CalificacionesService {
 		return ResponseEntity.status(HttpStatus.OK).body(respuesta);
 	}
 
-	private Object mapCalificacionToResponse(Calificacion calificacion) {
+	private ResponseCalificacionDTO mapCalificacionToResponse(Calificacion calificacion) {
 		return new ResponseCalificacionDTO(
 				calificacion.getAlumno().getIdAlumno(), 
 				calificacion.getAlumno().getNombre(),
@@ -148,10 +158,44 @@ public class CalificacionesImpl implements CalificacionesService {
 			for (Calificacion calificacion : calificaciones) {
 				suma += calificacion.getCalificacion();
 			}
-			promedio = suma / calificaciones.size();
+			// Redondeo a dos decimales
+			promedio = Math.round((suma / calificaciones.size()) * 100) / 100d;
 		}
 
 		return new PromedioDTO(promedio);
+	}
+
+	@Override
+	public byte[] exportaReportePdf(Long idAlumno) throws JRException, FileNotFoundException {
+		Optional<Alumno> alumno = alumnoRepository.findById(idAlumno);
+		if (alumno.isEmpty()) {
+			throw new AlumnoNotFoundException(idAlumno);
+		}
+
+		Calificacion probe = new Calificacion();
+		probe.setAlumno(alumno.get());
+
+		List<Calificacion> calificaciones = calificacionRepository.findAll(Example.of(probe));
+
+		if (calificaciones.isEmpty()) {
+			throw new CalificacionesNotFoundException();
+		}
+
+		List<ResponseCalificacionDTO> lstObjetos = new ArrayList<>();
+		for (Calificacion calificacion : calificaciones) {
+			lstObjetos.add(mapCalificacionToResponse(calificacion));
+		}
+
+		String nomReporte = "reports/CalificacionesReport.jrxml";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nombreAlumno",
+				new StringBuffer().append(alumno.get().getNombre()).append(" ")
+						.append(alumno.get().getApellidoPaterno()).append(" ").append(alumno.get().getApellidoMaterno())
+						.toString());
+		params.put("calPromedio", calcularPromedio(calificaciones).getPromedio());
+		params.put("calificacionesData", new JRBeanCollectionDataSource(lstObjetos));
+
+		return generadorReportes.exportToPdf(nomReporte, params);
 	}
 
 }
