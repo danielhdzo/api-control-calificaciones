@@ -152,7 +152,7 @@
 			<id>prod</id>
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
-				<datasource.jdbc-url>postgresql://postgres:rUPrwgaCcF952PNIlkHD@containers-us-west-34.railway.app:6614/railway</datasource.jdbc-url>
+				<datasource.jdbc-url>jdbc:postgresql://containers-us-west-34.railway.app:6614/railway</datasource.jdbc-url>
 				<datasource.username>postgres</datasource.username>
 				<datasource.password>rUPrwgaCcF952PNIlkHD</datasource.password>
 			</properties>
