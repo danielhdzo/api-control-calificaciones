@@ -58,7 +58,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		ResponseExitoDTO respuesta = new ResponseExitoDTO("Calificacion registrada");
 
-		return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+		return ResponseEntity.status(HttpStatus.CREATED).body(respuesta);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		response.add(calcularPromedio(calificaciones));
 
-		return ResponseEntity.ok(response);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		ResponseExitoDTO respuesta = new ResponseExitoDTO("Calificacion actualizada");
 
-		return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(respuesta);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		ResponseExitoDTO respuesta = new ResponseExitoDTO("Calificacion eliminada");
 
-		return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(respuesta);
 	}
 
 	private ResponseCalificacionDTO mapCalificacionToResponse(Calificacion calificacion) {

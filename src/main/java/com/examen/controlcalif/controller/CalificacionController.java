@@ -25,7 +25,7 @@ import com.examen.controlcalif.service.CalificacionesService;
 import net.sf.jasperreports.engine.JRException;
 
 @RestController
-@RequestMapping("api/calificaciones")
+@RequestMapping("api/v1/calificaciones")
 public class CalificacionController {
 
 	@Autowired
