@@ -48,10 +48,10 @@ public class CalificacionesImpl implements CalificacionesService {
 	@Autowired
 	private GeneradorReportes generadorReportes;
 
-	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constantes.PATRON_FECHA);
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constantes.PATRON_FECHA);
 
 	@Override
-	public ResponseEntity<?> agregarCalificacion(CalificacionDTO calificacionDTO) {
+	public ResponseEntity<ResponseExitoDTO> agregarCalificacion(CalificacionDTO calificacionDTO) {
 		Calificacion calificacion = mapCalificacionDtoToEntity(calificacionDTO);
 
 		calificacionRepository.save(calificacion);
@@ -62,7 +62,7 @@ public class CalificacionesImpl implements CalificacionesService {
 	}
 
 	@Override
-	public ResponseEntity<?> obtenerCalificacionesPorAlumno(Long idAlumno) {
+	public ResponseEntity<List<Object>> obtenerCalificacionesPorAlumno(Long idAlumno) {
 		Optional<Alumno> alumno = alumnoRepository.findById(idAlumno);
 		if (alumno.isEmpty()) {
 			throw new AlumnoNotFoundException(idAlumno);
@@ -88,7 +88,7 @@ public class CalificacionesImpl implements CalificacionesService {
 	}
 
 	@Override
-	public ResponseEntity<?> actualizarCalificacion(Long idCalificacion, CalificacionDTO calificacionActualizada) {
+	public ResponseEntity<ResponseExitoDTO> actualizarCalificacion(Long idCalificacion, CalificacionDTO calificacionActualizada) {
 		Optional<Calificacion> calificacion = calificacionRepository.findById(idCalificacion);
 		if (calificacion.isEmpty()) {
 			throw new CalificacionesNotFoundException();
@@ -103,7 +103,7 @@ public class CalificacionesImpl implements CalificacionesService {
 	}
 
 	@Override
-	public ResponseEntity<?> eliminarCalificacion(Long idCalificacion) {
+	public ResponseEntity<ResponseExitoDTO> eliminarCalificacion(Long idCalificacion) {
 		Optional<Calificacion> calificacion = calificacionRepository.findById(idCalificacion);
 		if (calificacion.isEmpty()) {
 			throw new CalificacionesNotFoundException();
@@ -187,7 +187,7 @@ public class CalificacionesImpl implements CalificacionesService {
 		}
 
 		String nomReporte = "reports/CalificacionesReport.jrxml";
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<>();
 		params.put("nombreAlumno",
 				new StringBuffer().append(alumno.get().getNombre()).append(" ")
 						.append(alumno.get().getApellidoPaterno()).append(" ").append(alumno.get().getApellidoMaterno())

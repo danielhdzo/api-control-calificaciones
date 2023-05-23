@@ -22,10 +22,8 @@ public class GeneradorReportes {
 
 	private JasperPrint getReporte(String nomReporte, Map<String, Object> params)
 			throws FileNotFoundException, JRException {
-		JasperPrint report = JasperFillManager.fillReport(
+		return JasperFillManager.fillReport(
 				JasperCompileManager.compileReport(ResourceUtils.getFile("classpath:" + nomReporte).getAbsolutePath()),
 				params, new JREmptyDataSource());
-
-		return report;
 	}
 }

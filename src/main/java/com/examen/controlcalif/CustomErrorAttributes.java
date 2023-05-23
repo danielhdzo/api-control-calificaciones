@@ -20,6 +20,8 @@ import lombok.Setter;
 @Setter
 public class CustomErrorAttributes extends DefaultErrorAttributes {
 
+	private static final String TIMESTAMP = "timestamp";
+	
 	@Override
 	public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
 		DateFormat dateFormat = new SimpleDateFormat(Constantes.PATRON_FECHA_HORA);
@@ -30,11 +32,11 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
 		errorAttributes.remove("trace");
 
 		// Formatea timestamp
-		Object timestamp = errorAttributes.get("timestamp");
+		Object timestamp = errorAttributes.get(TIMESTAMP);
 		if (timestamp == null) {
-			errorAttributes.put("timestamp", dateFormat.format(new Date()));
+			errorAttributes.put(TIMESTAMP, dateFormat.format(new Date()));
 		} else {
-			errorAttributes.put("timestamp", dateFormat.format((Date) timestamp));
+			errorAttributes.put(TIMESTAMP, dateFormat.format((Date) timestamp));
 		}
 
 		return errorAttributes;

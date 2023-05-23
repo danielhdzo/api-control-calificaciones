@@ -33,7 +33,7 @@ public class ConfigurationApplication {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(getDataSource());
-		em.setPackagesToScan(new String[] { "com.examen.controlcalif.model" });
+		em.setPackagesToScan("com.examen.controlcalif.model");
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

@@ -1,6 +1,7 @@
 package com.examen.controlcalif.controller;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examen.controlcalif.dto.CalificacionDTO;
+import com.examen.controlcalif.dto.ResponseExitoDTO;
 import com.examen.controlcalif.service.CalificacionesService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -30,23 +32,23 @@ public class CalificacionController {
 	CalificacionesService calificacionesService;
 
 	@PostMapping
-	public ResponseEntity<?> agregarCalificacion(@Valid @RequestBody CalificacionDTO calificacionDTO) {
+	public ResponseEntity<ResponseExitoDTO> agregarCalificacion(@Valid @RequestBody CalificacionDTO calificacionDTO) {
 		return calificacionesService.agregarCalificacion(calificacionDTO);
 	}
 
 	@GetMapping("/{idAlumno}")
-	public ResponseEntity<?> obtenerCalificacionesPorAlumno(@PathVariable Long idAlumno) {
+	public ResponseEntity<List<Object>>  obtenerCalificacionesPorAlumno(@PathVariable Long idAlumno) {
 		return calificacionesService.obtenerCalificacionesPorAlumno(idAlumno);
 	}
 
 	@PutMapping("/{idCalificacion}")
-	public ResponseEntity<?> actualizarCalificacion(@PathVariable Long idCalificacion,
+	public ResponseEntity<ResponseExitoDTO> actualizarCalificacion(@PathVariable Long idCalificacion,
 			@Valid @RequestBody CalificacionDTO calificacionActualizada) {
 		return calificacionesService.actualizarCalificacion(idCalificacion, calificacionActualizada);
 	}
 
 	@DeleteMapping("/{idCalificacion}")
-	public ResponseEntity<?> eliminarCalificacion(@PathVariable Long idCalificacion) {
+	public ResponseEntity<ResponseExitoDTO> eliminarCalificacion(@PathVariable Long idCalificacion) {
 		return calificacionesService.eliminarCalificacion(idCalificacion);
 	}
 
