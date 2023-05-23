@@ -31,7 +31,7 @@
 - El archivo **pom.xml** contiene la información de conexión requerida, (URL, nombre de la base de datos, el nombre de usuario y la contraseña). 
 - El aplicativo utiliza una base de datos **PostgreSQL**; asegúrate de tener una instancia de base de datos compatible instalada y configurada, también son compatibles las bases de datos en la nube (AWS, Azure, Google Cloud, etc., etc.).
 - Verifica que los datos de conexión de tu base de datos correspondan en cada perfil (Desarrollo, UAT, Producción, etc.) del archivo **pom.xml**.
-- En el directorio `/api-control-calificaciones/src/main/resources`, encontrarás los scripts `data.sql` y `schema.sql`. Estos scripts se utilizan para configurar la base de datos y cargar datos de ejemplo. 
+- En el directorio `/api-control-calificaciones/src/main/resources` encontrarás los scripts `data.sql` y `schema.sql` que se utilizan para crear las tablas de la base de datos y cargar datos de ejemplo. 
 - **Ejecuta el script** `schema.sql` para crear la estructura de la base de datos. 
 - **Ejecuta el script** `data.sql` para cargar datos de ejemplo en la base de datos.
 - Deberás ejecutar estos scripts en cada base de datos que tengas configurada en cada perfil.
@@ -41,13 +41,13 @@
 - Abre una terminal o línea de comandos en la ubicación del proyecto.
 - Ejecuta el siguiente comando para compilar el proyecto utilizando el perfil de **Desarrollo**:
 
-	`mvn clean install -P dev`
+`mvn clean install -P dev`
 
 - Ejecuta el siguiente comando para compilar el proyecto utilizando el perfil de "**Producción**":` 
 
-	`mvn clean install -P prod`
+`mvn clean install -P prod`
 
-	> **Nota**: Recuerda revisar y configurar los datos de conexión en cada perfil dentro del archivo **pom.xml**. El archivo actualmente tiene el perfil  de **Desarrollo** por default y este apunta a una base de datos ubicada en **localhost**, el perfil de **Producción** apunta a una base de datos ubicada en la nube.
+> **Nota**: Recuerda revisar y configurar los datos de conexión en cada perfil dentro del archivo **pom.xml**. El archivo actualmente tiene el perfil  de **Desarrollo** por default y este apunta a una base de datos ubicada en **localhost**, el perfil de **Producción** apunta a una base de datos ubicada en la nube.
 
 ### 6. Ejecutar el back-end
 
@@ -55,11 +55,11 @@
 - Si estás utilizando la línea de comandos, navega hasta la ubicación del archivo JAR (o WAR) generado en el paso 5
 - Ejecuta el siguiente comando para iniciar la aplicación utilizando el perfil "**dev**":
 
-    mvn spring-boot:run -P dev
+`mvn spring-boot:run -P dev`
 
 - Ejecuta el siguiente comando para iniciar la aplicación utilizando el perfil "**prod**":
 
-    mvn spring-boot:run -P prod
+`mvn spring-boot:run -P prod`
 
 ### 7. Verificar la instalación
 
@@ -68,4 +68,4 @@
 
 **¡Felicidades!** Has instalado correctamente el back-end del api-control-calificaciones. Ahora estará listo para funcionar y atender las solicitudes del front-end o de cualquier cliente que se comunique con él.
 
-> **Nota**: Estos pasos pueden variar ligeramente dependiendo de tu entorno y configuración específicos. Consulta la documentación proporcionada con el código fuente o busca asistencia adicional si encuentras problemas durante la instalación o configuración del sistema.> 
+> **Nota**: Estos pasos pueden variar ligeramente dependiendo de tu entorno y configuración específicos. Consulta la documentación proporcionada con el código fuente o busca asistencia adicional si encuentras problemas durante la instalación o configuración del sistema.
