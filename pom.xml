@@ -124,5 +124,27 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+				<datasource.jdbc-url>jdbc:postgresql://localhost:5432/escuela</datasource.jdbc-url>
+				<datasource.username>postgres</datasource.username>
+				<datasource.password>root</datasource.password>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+				<datasource.jdbc-url>jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}</datasource.jdbc-url>
+				<datasource.username>${PGUSER}</datasource.username>
+				<datasource.password>${PGPASSWORD}</datasource.password>
+			</properties>
+		</profile>
+	</profiles>
 </project>
