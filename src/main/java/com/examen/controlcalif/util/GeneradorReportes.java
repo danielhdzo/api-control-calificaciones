@@ -1,6 +1,7 @@
 package com.examen.controlcalif.util;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -22,8 +23,16 @@ public class GeneradorReportes {
 
 	private JasperPrint getReporte(String nomReporte, Map<String, Object> params)
 			throws FileNotFoundException, JRException {
-		return JasperFillManager.fillReport(
-				JasperCompileManager.compileReport(ResourceUtils.getFile("classpath:" + nomReporte).getAbsolutePath()),
-				params, new JREmptyDataSource());
+
+		JasperPrint jasperPrint = null;
+		try {
+			jasperPrint = JasperFillManager.fillReport(
+					JasperCompileManager.compileReport(ResourceUtils.getURL("classpath:" + nomReporte).openStream()),
+					params, new JREmptyDataSource());
+		} catch (JRException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return jasperPrint;
 	}
 }
