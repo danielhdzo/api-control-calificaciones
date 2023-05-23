@@ -29,8 +29,10 @@
 ### 4. Configurar la base de datos
 
 - El archivo **pom.xml** proporciona la información de configuración requerida, (URL, nombre de la base de datos, el nombre de usuario y la contraseña). 
-- Se utiliza una base de datos **PostgreSQL**; asegúrate de tener una instancia de base de datos compatible instalada y configurada o bien una base de datos publicada en alguna nube (AWS, Azure, Google Cloud, etc., etc.).
-- Consulta la documentación del api-control-calificaciones para obtener detalles sobre la instalación y configuración de la base de datos.
+- El aplicativo utiliza una base de datos **PostgreSQL**; asegúrate de tener una instancia de base de datos compatible instalada y configurada o también publicada en alguna nube (AWS, Azure, Google Cloud, etc., etc.).
+- En el directorio `/api-control-calificaciones/src/main/resources`, encontrarás los scripts `data.sql` y `schema.sql`. Estos scripts se utilizan para configurar la base de datos y cargar datos de ejemplo. 
+- **Ejecuta el script** `schema.sql` para crear la estructura de la base de datos. 
+- **Ejecuta el script** `data.sql` para cargar datos de ejemplo en la base de datos.
 
 ### 5. Compilar el proyecto
 
