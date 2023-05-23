@@ -99,7 +99,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		ResponseExitoDTO respuesta = new ResponseExitoDTO("Calificacion actualizada");
 
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(respuesta);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(respuesta);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class CalificacionesImpl implements CalificacionesService {
 
 		ResponseExitoDTO respuesta = new ResponseExitoDTO("Calificacion eliminada");
 
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(respuesta);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(respuesta);
 	}
 
 	private ResponseCalificacionDTO mapCalificacionToResponse(Calificacion calificacion) {
