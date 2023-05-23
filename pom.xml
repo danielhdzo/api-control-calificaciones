@@ -110,6 +110,11 @@
 		</resources>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version><!--$NO-MVN-MAN-VER$-->
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<executions>
@@ -147,9 +152,9 @@
 			<id>prod</id>
 			<properties>
 				<spring.profiles.active>prod</spring.profiles.active>
-				<datasource.jdbc-url>jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}</datasource.jdbc-url>
-				<datasource.username>${PGUSER}</datasource.username>
-				<datasource.password>${PGPASSWORD}</datasource.password>
+				<datasource.jdbc-url>jdbc:postgresql://${env.PGHOST}:${env.PGPORT}/${env.PGDATABASE}</datasource.jdbc-url>
+				<datasource.username>${env.PGUSER}</datasource.username>
+				<datasource.password>${env.PGPASSWORD}</datasource.password>
 			</properties>
 		</profile>
 	</profiles>
