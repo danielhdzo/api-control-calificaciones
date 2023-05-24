@@ -63,8 +63,15 @@
 
 ### 7. Verificar la instalación
 
-- Una vez que el back-end esté en funcionamiento, puedes realizar pruebas accediendo a los endpoints proporcionados por la aplicación utilizando una herramienta como Postman o un navegador web.
-- Consulta la documentación del API Control de Calificaciones para obtener detalles sobre los endpoints disponibles y cómo utilizarlos.
+- Una vez que el back-end esté en funcionamiento, puedes realizar pruebas accediendo a los endpoints utilizando una herramienta de documentación del API ubicada en la rutas:
+
+**Desarrollo:**
+`http://localhost:8080/controlcalif/swagger-ui.html`
+**Produccion:**
+`https://api-control-calificaciones-prod.up.railway.app/controlcalif/swagger-ui.html`
+
+- Tambien puede utilizar la herramienta como Postman o un navegador web para probar los endpoints.
+- Consulta la documentación con el Administrador del proyecto para obtener detalles sobre los endpoints disponibles y cómo utilizarlos.
 
 **¡Felicidades!** Has instalado correctamente el back-end del api-control-calificaciones. Ahora estará listo para funcionar y atender las solicitudes del front-end o de cualquier cliente que se comunique con él.
 

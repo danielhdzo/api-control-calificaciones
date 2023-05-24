@@ -1,4 +1,4 @@
-package com.examen.controlcalif;
+package com.examen.controlcalif.config;
 
 import javax.sql.DataSource;
 
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-public class ConfigurationApplication {
+public class ApplicationConfig {
 
 	@Primary
 	@Bean(name = "dataSource")

@@ -20,6 +20,6 @@ public interface CalificacionesService {
 
 	public ResponseEntity<ResponseExitoDTO> eliminarCalificacion(Long idCalificacion);
 
-	byte[] exportaReportePdf(Long idAlumno) throws JRException, FileNotFoundException;
+	public ResponseEntity<byte[]> exportaReportePdf(Long idAlumno) throws JRException, FileNotFoundException;
 
 }

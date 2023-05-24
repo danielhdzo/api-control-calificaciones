@@ -1,4 +1,4 @@
-package com.examen.controlcalif;
+package com.examen.controlcalif.config;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

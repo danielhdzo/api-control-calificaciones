@@ -1,4 +1,4 @@
-package com.examen.controlcalif;
+package com.examen.controlcalif.config;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

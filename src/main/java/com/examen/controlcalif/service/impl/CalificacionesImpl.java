@@ -12,7 +12,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -166,7 +168,7 @@ public class CalificacionesImpl implements CalificacionesService {
 	}
 
 	@Override
-	public byte[] exportaReportePdf(Long idAlumno) throws JRException, FileNotFoundException {
+	public ResponseEntity<byte[]> exportaReportePdf(Long idAlumno) throws JRException, FileNotFoundException {
 		Optional<Alumno> alumno = alumnoRepository.findById(idAlumno);
 		if (alumno.isEmpty()) {
 			throw new AlumnoNotFoundException(idAlumno);
@@ -195,7 +197,13 @@ public class CalificacionesImpl implements CalificacionesService {
 		params.put("calPromedio", calcularPromedio(calificaciones).getPromedio());
 		params.put("calificacionesData", new JRBeanCollectionDataSource(lstObjetos));
 
-		return generadorReportes.exportToPdf(nomReporte, params);
+		byte[] bytesReporte = generadorReportes.exportToPdf(nomReporte, params);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+		headers.setContentDispositionFormData("calificacionesReport", "CalificacionesReport.pdf");
+		
+		return ResponseEntity.ok().headers(headers).body(bytesReporte);
 	}
 
 }
